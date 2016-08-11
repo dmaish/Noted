@@ -45,15 +45,15 @@ public class NotesProvider extends ContentProvider {
         DBOpenHelper helper = new DBOpenHelper(getContext());
         //create and get the database using an instance of SQlite database
          database = helper.getWritableDatabase();
-
-
         return true;
     }
 
     @Nullable
     @Override
+    //this method gets data from the database.It either returns a single row or the whole dataset
     public Cursor query(Uri uri, String[] strings, String s, String[] strings1, String s1) {
-        return null;
+        return database.query(DBOpenHelper.TABLE_NOTES,DBOpenHelper.ALL_COLUMNS,s,null,null,null,
+                DBOpenHelper.NOTE_CREATED + "DESC" );
     }
 
     @Nullable
@@ -65,16 +65,17 @@ public class NotesProvider extends ContentProvider {
     @Nullable
     @Override
     public Uri insert(Uri uri, ContentValues contentValues) {
-        return null;
+        long id = database.insert(DBOpenHelper.TABLE_NOTES,null,contentValues);
+        return Uri.parse(BASE_PATH + "/"+ id);
     }
 
     @Override
     public int delete(Uri uri, String s, String[] strings) {
-        return 0;
+        return database.delete(DBOpenHelper.TABLE_NOTES,s,strings);
     }
 
     @Override
     public int update(Uri uri, ContentValues contentValues, String s, String[] strings) {
-        return 0;
+        return database.update(DBOpenHelper.TABLE_NOTES,contentValues,s,strings);
     }
 }
