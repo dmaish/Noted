@@ -30,21 +30,24 @@ public class DBOpenHelper extends SQLiteOpenHelper {
                     ")";
 
 
-
-
-    public DBOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+//openHelper constructor - the parametres not needed have been removed
+    public DBOpenHelper(Context context) {
+        super(context, DATABASE_NAME, null,DATABASE_VERSION);
     }
 
     //method for initiating the DB the first time its created
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-
+            //executing the query to create the database table
+        sqLiteDatabase.execSQL(TABLE_CREATE);
     }
 
     //method for rebuilding the database with a new or updated structure
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
+        //if database has changed,the current table will be deleted using the following command
+            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NOTES);
+        //the the oncreate method below will be run to create the new table(upgrading
+            onCreate(sqLiteDatabase);
     }
 }
