@@ -19,7 +19,7 @@ public class NotesProvider extends ContentProvider {
     //since this app has only one table it'll take "notes"-the name of the table -as the only BASE_PATH
     private static final String BASE_PATH = "notes";
     //the following Uniform Resource Identifier identifies the content provider
-    private static final Uri CONTENT_URI =
+    public static final Uri CONTENT_URI =
             Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH);
 
 
