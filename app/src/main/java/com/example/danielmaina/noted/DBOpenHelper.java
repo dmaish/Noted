@@ -13,11 +13,22 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "notes.db";
     private static final int DATABASE_VERSION = 1;
 
-    //Constants for identifying table and columns
+    //Constants for identifying table and column
+    //table
     private static final String TABLE_NOTES = "notes";
+    //columns
     private static final String NOTE_ID = "_id";
     private static final String NOTE_TEXT ="noteText";
     private static final String NOTE_CREATED = "noteCreated";
+
+    //SQL code to create the table(the query)
+    private static final String TABLE_CREATE =
+            "CREATE TABLE " + TABLE_NOTES + " (" +
+                    NOTE_ID + "INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    NOTE_TEXT + " TEXT, " +
+                    NOTE_CREATED + " TEXT default CURRENT_TIMESTAMP" +
+                    ")";
+
 
 
 
