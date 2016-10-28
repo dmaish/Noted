@@ -1,6 +1,7 @@
 package com.example.danielmaina.noted;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -22,6 +23,10 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         insertNote("New note");
+
+        //cursor object
+        Cursor cursor = getContentResolver().query(NotesProvider.CONTENT_URI,
+                DBOpenHelper.ALL_COLUMNS,null,null,null,null);
 
 
        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
